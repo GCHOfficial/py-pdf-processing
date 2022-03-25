@@ -1,0 +1,27 @@
+name: build-exe
+
+on: [push]
+
+jobs:
+  build:
+
+    runs-on: windows-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - name: Set up Python 3.9
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.9
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install pyinstaller PyPDF2 PyQt5
+    - name: Build with pyinstaller
+      run: |
+        pyinstaller -F -w main.py
+    - name: Store build artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: py-pdf-processing
+        path: D:\a\py-pdf-processing\py-pdf-processing\dist\
