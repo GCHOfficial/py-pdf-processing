@@ -205,7 +205,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
     def save_files_dialog(self):
         dlg = QtWidgets.QFileDialog()
         dlg.setFileMode(QtWidgets.QFileDialog.DirectoryOnly)
-        dlg.setAcceptMode(QtWidgets.QFileDialog.AcceptSave)
+        dlg.setAcceptMode(QtWidgets.QFileDialog.AcceptOpen)
         if dlg.exec_():
             return dlg.selectedFiles()
 
