@@ -13,4 +13,4 @@ This is the second consistent project I've created using Python and community li
 * Automatic secure password generation (with copy to clipboard on textbox click)
 
 # Release
-A Windows executable was released along with the source code, which can be donloaded [here](https://github.com/GCHOfficial/py-pdf-processing/releases/tag/0.1.0).
+A Windows executable was generated using GitHub Actions, then released along with the source code, and they can  be found [here](https://github.com/GCHOfficial/py-pdf-processing/releases/tag/0.1.0).
