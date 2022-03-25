@@ -205,8 +205,6 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
     def save_files_dialog(self):
         dlg = QtWidgets.QFileDialog()
         dlg.setFileMode(QtWidgets.QFileDialog.DirectoryOnly)
-        dlg.setNameFilters(["PDF Files (*.pdf)"])
-        dlg.selectNameFilter("PDF Files (*.pdf)")
         dlg.setAcceptMode(QtWidgets.QFileDialog.AcceptSave)
         if dlg.exec_():
             return dlg.selectedFiles()
