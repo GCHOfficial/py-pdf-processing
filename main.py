@@ -23,7 +23,7 @@ def exception_handler(func):
         except utils.PdfReadError:
             pg = PyGUI()
             pg.info_messagebox(
-                "Cannot decrypt, password was incorrect or wrong/corrupted file",
+                "File error. For decryption, password was wrong, otherwise, one of the input files might be corrupted.",
             )
 
     return wrap_function
@@ -121,7 +121,6 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             files.append(self.ui.mergeList.item(index).text())
         if not files == []:
             self.pdf_merge(files)
-            self.info_messagebox("Files succesfully merged!", dicon=1)
         else:
             self.info_messagebox("Input files not selected!")
 
@@ -132,7 +131,6 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             files.append(self.ui.splitList.item(index).text())
         if not files == []:
             self.pdf_split(files)
-            self.info_messagebox("File(s) succesfully split!", dicon=1)
         else:
             self.info_messagebox("Input files not selected!")
 
@@ -143,7 +141,6 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             files.append(self.ui.watermarkList.item(index).text())
         if not files == []:
             self.pdf_watermark(files)
-            self.info_messagebox("File(s) succesfully watermarked!", dicon=1)
         else:
             self.info_messagebox("Input files not selected!")
 
@@ -154,7 +151,6 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             files.append(self.ui.encryptionList.item(index).text())
         if not files == []:
             self.pdf_encrypt(files)
-            self.info_messagebox("File(s) succesfully encrypted!", dicon=1)
         else:
             self.info_messagebox("Input files not selected!")
 
@@ -165,7 +161,6 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             files.append(self.ui.encryptionList.item(index).text())
         if not files == []:
             self.pdf_decrypt(files)
-            self.info_messagebox("File(s) succesfully decrypted!", dicon=1)
         else:
             self.info_messagebox("Input files not selected!")
 
@@ -183,7 +178,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                 self.ui.encryptionPassword.text(), mode=clipboard.Clipboard
             )
             self.ui.encryptionPassword.selectAll()
-            self.info_messagebox("Password copyied to clipboard!", dicon=1)
+            self.info_messagebox("Password copied to clipboard!", dicon=1, dtitle="Password copied")
 
     # Other UI utils
     def info_messagebox(
@@ -227,6 +222,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         if len(name[0]) > 1:
             with open(name[0], "wb") as out:
                 pdf_writer.write(out)
+        self.info_messagebox("Files succesfully merged!", dicon=1, dtitle="Success!")
 
     def pdf_split(self, files):
         fname_pattern = r"[^\\|\/]([\\|\/][^\\\/]+)\.[^\\|\/]+"
@@ -244,6 +240,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                     )
                     with open(path, "wb") as out:
                         pdf_writer.write(out)
+            self.info_messagebox("File(s) succesfully split!", dicon=1, dtitle="Success!")
         else:
             if len(files) < 2:
                 pdf_reader = PdfFileReader(files[0])
@@ -269,6 +266,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                         and page < pdf_reader.getNumPages()
                     ):
                         pdf_writer.addPage(pdf_reader.getPage(page))
+                self.info_messagebox("File succesfully split!", dicon=1, dtitle="Success!")
             else:
                 self.info_messagebox("Page split only works with single file input!")
 
@@ -293,6 +291,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                     )
                     with open(path, "wb") as out:
                         pdf_writer.write(out)
+            self.info_messagebox("File(s) succesfully watermarked!", dicon=1, dtitle="Success!")
         else:
             self.info_messagebox("Watermark file not selected!")
 
@@ -313,6 +312,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                 with open(path, "wb") as out:
                     pdf_writer.encrypt(self.ui.encryptionPassword.text())
                     pdf_writer.write(out)
+            self.info_messagebox("File(s) succesfully encrypted!", dicon=1, dtitle="Success!")
         else:
             self.info_messagebox(
                 "Password must be bigger than 8 characters!",
@@ -336,6 +336,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
                 )
                 with open(path, "wb") as out:
                     pdf_writer.write(out)
+            self.info_messagebox("File(s) succesfully decrypted!", dicon=1, dtitle="Success!")
         else:
             self.info_messagebox(
                 "Password must be bigger than 8 characters!", "Password too short"
