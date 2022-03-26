@@ -274,6 +274,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         if not self.watermark == "":
             watermark_file = PdfFileReader(self.watermark)
             watermark_page = watermark_file.getPage(0)
+            watermark_page.setFillAlpha(0.35)
             fname_pattern = r"[^\\|\/]([\\|\/][^\\\/]+)\.[^\\|\/]+"
             name = self.save_files_dialog()
             if len(name[0]) > 1:
