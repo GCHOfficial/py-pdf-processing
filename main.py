@@ -121,6 +121,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             files.append(self.ui.mergeList.item(index).text())
         if not files == []:
             self.pdf_merge(files)
+            self.info_messagebox("Files succesfully merged!", dicon=1)
         else:
             self.info_messagebox("Input files not selected!")
 
@@ -131,6 +132,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             files.append(self.ui.splitList.item(index).text())
         if not files == []:
             self.pdf_split(files)
+            self.info_messagebox("File(s) succesfully split!", dicon=1)
         else:
             self.info_messagebox("Input files not selected!")
 
@@ -141,6 +143,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             files.append(self.ui.watermarkList.item(index).text())
         if not files == []:
             self.pdf_watermark(files)
+            self.info_messagebox("File(s) succesfully watermarked!", dicon=1)
         else:
             self.info_messagebox("Input files not selected!")
 
@@ -151,6 +154,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             files.append(self.ui.encryptionList.item(index).text())
         if not files == []:
             self.pdf_encrypt(files)
+            self.info_messagebox("File(s) succesfully encrypted!", dicon=1)
         else:
             self.info_messagebox("Input files not selected!")
 
@@ -161,6 +165,7 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             files.append(self.ui.encryptionList.item(index).text())
         if not files == []:
             self.pdf_decrypt(files)
+            self.info_messagebox("File(s) succesfully decrypted!", dicon=1)
         else:
             self.info_messagebox("Input files not selected!")
 
