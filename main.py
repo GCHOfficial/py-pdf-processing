@@ -4,8 +4,6 @@ from ui.main_window import Ui_MainWindow
 from functools import partial
 from PyPDF2 import PdfFileWriter, PdfFileReader, utils
 from passwordgen import PasswordGenerator
-from reportlab.pdfgen import canvas
-from reportlab.lib.units import cm
 import re
 import sys
 
@@ -276,7 +274,6 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
         if not self.watermark == "":
             watermark_file = PdfFileReader(self.watermark)
             watermark_page = watermark_file.getPage(0)
-            watermark_page = self.watermark_alpha(watermark_page)
             fname_pattern = r"[^\\|\/]([\\|\/][^\\\/]+)\.[^\\|\/]+"
             name = self.save_files_dialog()
             if len(name[0]) > 1:
@@ -344,12 +341,6 @@ class PyGUI(QtWidgets.QMainWindow, Ui_MainWindow):
             self.info_messagebox(
                 "Password must be bigger than 8 characters!", "Password too short"
             )
-            
-    def watermark_alpha(self, watermark):
-        page = watermark
-        page.setFillAlpha(0.35)
-        page.save()
-        return page
 
     # Get QApplication for clipboard modification
     def get_qapp(self, qapp):
