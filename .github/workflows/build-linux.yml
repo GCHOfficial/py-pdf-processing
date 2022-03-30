@@ -23,4 +23,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: py-pdf-processing-linux
-          path: src/dist/linux
+          path: /home/runner/work/py-pdf-processing/py-pdf-processing/dist/main
