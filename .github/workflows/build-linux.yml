@@ -11,17 +11,17 @@ jobs:
       - name: Set up Python 3.9
         uses: actions/setup-python@v3
         with:
-          python-version: 3.9
+          python-version: 3.9.7
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install pyinstaller PyPDF2 PyQt5
       - name: Install libraries
         run: |
-          sudo apt-get update && sudo apt-get install -y build-essential libqt5gui5 tcl8.6 libicu60
+          sudo apt-get update && sudo apt-get install -y libqt5gui5
       - name: Build with pyinstaller
         run: |
-          pyinstaller -F -w main.py --hidden-import=PyQt5.sip
+          pyinstaller -F -w main.py
       - name: Store build artifact
         uses: actions/upload-artifact@v3
         with:
