@@ -18,10 +18,10 @@ jobs:
           pip install pyinstaller PyPDF2 PyQt5
       - name: Install libraries
         run: |
-          sudo apt-get update && sudo apt-get install -y build-essential libqt5gui5
+          sudo apt-get update && sudo apt-get install -y build-essential libqt5gui5 tcl8.6 libicu60
       - name: Build with pyinstaller
         run: |
-          pyinstaller -F -w main.py
+          pyinstaller -F -w main.py --hidden-import=PyQt5.sip
       - name: Store build artifact
         uses: actions/upload-artifact@v3
         with:
